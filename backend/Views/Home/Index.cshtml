@@ -1,0 +1,20 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel App</title>
+    <link rel="stylesheet" href="~/dist/app.css" asp-append-version="true"/>
+</head>
+<body>
+    <div id="appRoot">...Loading</div>
+    <script src="~/dist/app.js" asp-append-version="true"></script>
+    <script>
+        const __appInit = @Html.Raw(
+            JsonSerializer.Serialize(Model, new JsonSerializerOptions {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        }));
+    </script>
+</body>
