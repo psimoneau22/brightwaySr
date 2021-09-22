@@ -23,16 +23,32 @@ public class BookingService {
         this.travelSettings = travelSettings.Value;
     }
 
-    public Task<Booking> GetDetail(int id) => bookingRepository.GetBooking(id);
+    public async Task<Booking> GetDetail(int id) {
+        var booking = await bookingRepository.GetBooking(id);
+        if(booking == null) {
+            return null;
+        }
+
+        var exchangeRate = await GetExchangeRate(booking.Destination);
+
+        booking.PopulateExchangeRateDetails(exchangeRate, travelSettings);
+
+        return booking;
+    }
 
     public async Task<Booking> CreateBooking(CreateBookingRequest request) {
+        var (booking, exchangeRate) = await TaskHelper.WhenAll(
+            bookingRepository.AddBooking(request),
+            GetExchangeRate(request.Destination)
+        );
 
-        var destination = await countryRepository.GetCountry(request.Destination);
+        booking.PopulateExchangeRateDetails(exchangeRate, travelSettings);
 
-        var result = exchangeProxy.Convert(travelSettings.CostPerDayUSD, "USD", destination.Currency);
-        return null;
-        //var dbData = await bookingRepository.AddBooking(request);
+        return booking;
+    }
 
-        //return dbData;
+    private async Task<decimal> GetExchangeRate(int targetCountryId) {
+        var destination = await countryRepository.GetCountry(targetCountryId);
+        return await exchangeProxy.GetExchangeRate("USD", destination.Currency);
     }
 }

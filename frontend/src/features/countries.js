@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getCountries } from '../api/countriesProxy'
 
-export const fetchCountries = createAsyncThunk('countries/load', getCountries)
+export const fetchCountries = createAsyncThunk('countries/load', getCountries, {
+    condition: (_, { getState }) => getState().countries.status === 'idle'
+})
 
 const countriesSlice = createSlice({
     name: 'countries',

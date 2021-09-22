@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './index.scss';
 import Destination from './Destination';
-import UserName from './UserName';
+import Username from './Username';
 import Email from './Email';
 import Duration from './Duration';
 import Submit from './Submit';
@@ -12,7 +12,7 @@ export default function Form() {
     return (
         <form className="form">
             <Destination/>
-            <UserName />
+            <Username />
             <Email />
             <Duration />
             <Submit />

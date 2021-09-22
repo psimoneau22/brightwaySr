@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 [Route("api/country")]
+[ApiController]
 public class CountryController : ControllerBase {
 
     private readonly CountryRepository countryRepository;

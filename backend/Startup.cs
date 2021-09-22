@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,20 +24,29 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllersWithViews();
+                .AddControllersWithViews()
+                .AddJsonOptions(options => {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                });
 
             services.Configure<TravelSettings>(Configuration.GetSection(TravelSettings.AppSettingName));
 
+            services.AddDbContextFactory<TravelDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Databases.TravelDB.AppSettingName)));
             services.AddDbContext<TravelDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString(Databases.TravelDB.AppSettingName)));
 
+
             services.AddHttpClient<ExchangeProxy>(client => {
-                var config = Configuration.GetSection(ExchangeProxy.AppSettingName);
-                client.BaseAddress = new System.Uri(config.GetValue<string>("BaseAddress"));
+                var apiConfig = Configuration.GetSection(ExchangeProxy.AppSettingName);
+                client.BaseAddress = new System.Uri(apiConfig.GetValue<string>("BaseAddress"));
+                client.DefaultRequestHeaders.Add("X-RapidAPI-Key", apiConfig.GetValue<string>("ApplicationKey"));
+                client.DefaultRequestHeaders.Add("X-RapidAPI-Host", apiConfig.GetValue<string>("currency-exchange.p.rapidapi.com"));
             });
 
+            services.AddSingleton<DbProvider<TravelDbContext>>();
             services.AddTransient<CountryRepository>();
             services.AddTransient<BookingRepository>();
+            services.AddTransient<BookingService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

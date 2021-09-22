@@ -12,8 +12,8 @@ public class ExchangeProxy {
         this.exchangeClient = exchangeClient;
     }
 
-    public async Task<decimal> Convert(decimal amount, string sourceCurrencySymbol, string targetCurrencySymbol) {
-        var response = await exchangeClient.GetAsync($"exchange?from={sourceCurrencySymbol}&to={targetCurrencySymbol}&q={amount}");
+    public async Task<decimal> GetExchangeRate(string sourceCurrencySymbol, string targetCurrencySymbol) {
+        var response = await exchangeClient.GetAsync($"exchange?from={sourceCurrencySymbol}&to={targetCurrencySymbol}");
         var result = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<decimal>(result);
     }

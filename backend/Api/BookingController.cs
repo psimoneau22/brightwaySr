@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/booking")]
+[ApiController]
 public class BookingController : ControllerBase {
 
     private readonly BookingService bookingService;
@@ -13,13 +14,15 @@ public class BookingController : ControllerBase {
     }
 
     [HttpGet("{id}")]
-    public async Task<Booking> GetDetail(int id) {
+    public async Task<ActionResult<Booking>> GetDetail(int id) {
         var dbData = await bookingService.GetDetail(id);
 
-        return dbData;
+        return dbData == null
+            ? NotFound()
+            : dbData;
     }
 
-    [HttpGet("{id}")]
+    [HttpPost("")]
     public async Task<Booking> CreateBooking(CreateBookingRequest request) {
 
         var result = await bookingService.CreateBooking(request);

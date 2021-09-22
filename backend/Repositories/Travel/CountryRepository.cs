@@ -5,16 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 public class CountryRepository {
 
-    private readonly TravelDbContext dbContext;
+    private readonly DbProvider<TravelDbContext> travelDb;
 
-    public CountryRepository(TravelDbContext dbContext) {
-        this.dbContext = dbContext;
+    public CountryRepository(DbProvider<TravelDbContext> travelDb) {
+        this.travelDb = travelDb;
     }
 
     public Task<List<Country>> ListCountries() =>
-        dbContext.Countries
-            .ToListAsync();
+        travelDb.Use(db => db.Countries.ToListAsync());
 
     public Task<Country> GetCountry(int id) =>
-        dbContext.Countries.SingleOrDefaultAsync(c => c.Id == id);
+        travelDb.Use(db => db.Countries.SingleOrDefaultAsync(c => c.Id == id));
 }

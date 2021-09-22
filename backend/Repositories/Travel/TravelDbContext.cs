@@ -11,6 +11,11 @@ public class TravelDbContext : DbContext {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Country>().ToTable("Country");
+
+        modelBuilder.Entity<Booking>()
+            .Ignore(b => b.CurrentExchangeRate)
+            .Ignore(b => b.TotalCostExchange)
+            .Ignore(b => b.CostPerDayExchange);
     }
 
     public DbSet<Country> Countries { get; set; }

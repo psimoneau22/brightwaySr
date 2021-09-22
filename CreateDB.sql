@@ -12,8 +12,8 @@ CREATE TABLE [Country] (
     [Currency] VARCHAR(10) NOT NULL
 )
 
-INSERT INTO [Country] ([Name], [Currency]) VALUES 
-    ('Mexico', 'MXN'), 
+INSERT INTO [Country] ([Name], [Currency]) VALUES
+    ('Mexico', 'MXN'),
     ('Japan', 'JPY'),
     ('Austrailia', 'AUD'),
     ('Canada', 'CAD'),
@@ -26,5 +26,4 @@ CREATE TABLE [Booking] (
     [Duration] INT NOT NULL,
     [Username] VARCHAR(255) NOT NULL,
     [Email] VARCHAR(255) NOT NULL,
-
 )
