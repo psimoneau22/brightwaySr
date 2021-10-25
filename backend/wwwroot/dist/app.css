@@ -353,27 +353,80 @@ body {
 * {
   box-sizing: border-box;
 }
-/*!*********************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/App/Welcome/index.scss ***!
-  \*********************************************************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/App/pages/Welcome/index.scss ***!
+  \***************************************************************************************************************************/
 .welcome {
   padding: 2rem;
 }
-/*!******************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/App/Form/index.scss ***!
-  \******************************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/App/pages/Form/index.scss ***!
+  \************************************************************************************************************************/
 .form {
   font-size: 2rem;
-  width: 100%;
   padding: 1rem;
+  width: 60%;
+  max-width: 60rem;
 }
 .form__row {
   display: flex;
   margin: 1rem 0;
+  justify-content: space-between;
+  height: 3rem;
+}
+.form__row--errors {
+  display: flex;
+  justify-content: flex-end;
+  color: red;
+  font-size: 1.5rem;
+}
+.form__row__destination .form__value {
+  font-size: 1.5rem;
+}
+.form__row__submit {
+  justify-content: end;
+  flex-direction: row-reverse;
+}
+.form__row__submit__clear {
+  margin-right: 2rem;
+  width: 9rem;
+}
+.form__row__submit__submit {
+  width: 9rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+.form__row__submit__submit:active, .form__row__submit__submit:hover {
+  background-color: #1c7430;
 }
 .form__label {
   width: 20rem;
 }
 .form__value {
   width: 20rem;
+  box-shadow: 0.4rem 0.4rem 0.4rem lightgray;
+  border-style: solid;
+  border-radius: 0.5rem;
+  border-width: 0.2rem;
+}
+/*!****************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/App/pages/NotFound/index.scss ***!
+  \****************************************************************************************************************************/
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+}
+.not-found__code {
+  font-size: 10rem;
+  margin-bottom: 1rem;
+}
+.not-found__title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.not-found__message {
+  font-size: 1.5rem;
 }

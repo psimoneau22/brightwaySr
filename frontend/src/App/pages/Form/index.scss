@@ -1,0 +1,58 @@
+.form {
+    font-size: 2rem;
+    padding: 1rem;;
+    width: 60%;
+    max-width: 60rem;
+
+    &__row {
+        display: flex;
+        margin: 1rem 0;
+        justify-content: space-between;
+        height: 3rem;
+
+        &--errors {
+            display: flex;
+            justify-content: flex-end;
+            color: red;
+            font-size: 1.5rem;
+        }
+
+        &__destination .form__value {
+            font-size: 1.5rem;
+        }
+
+        &__submit {
+            justify-content: end;
+            flex-direction: row-reverse;
+
+            &__clear {
+                margin-right: 2rem;
+                width: 9rem;
+            }
+
+            &__submit {
+                width: 9rem;
+                background-color: #28a745;
+                color: white;
+                border: none;
+
+                &:active, &:hover {
+                    background-color: #1c7430;
+                }
+            }
+        }
+
+    }
+
+    &__label {
+        width: 20rem;
+    }
+
+    &__value {
+        width: 20rem;
+        box-shadow: .4rem .4rem .4rem lightgray;
+        border-style: solid;
+        border-radius: .5rem;
+        border-width: .2rem;;
+    }
+  }

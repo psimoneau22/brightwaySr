@@ -1,10 +1,12 @@
 import axios from 'axios';
 
-export const getCountries = async () => {
+// eslint-disable-next-line import/prefer-default-export
+export async function getCountries() {
     try {
         const response = await axios.get('/api/country');
         return response.data;
     } catch (error) {
-        console.error(error);
+        // todo
+        return null;
     }
 }

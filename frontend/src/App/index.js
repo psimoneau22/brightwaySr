@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import 'normalize.css'
-import './index.scss'
+import 'normalize.css';
+import './index.scss';
 
-import Welcome from './Welcome';
-import Confirmation from './Confirmation';
-
-import Form from './Form';
+import Welcome from './pages/Welcome';
+import Confirmation from './pages/Confirmation';
+import Form from './pages/Form';
+import NotFound from './pages/NotFound';
 
 export default function App() {
     return (
@@ -15,11 +15,14 @@ export default function App() {
                 <Route path="/" exact>
                     <Welcome />
                 </Route>
-                <Route path="/book">
+                <Route path="/booking" exact>
                     <Form />
                 </Route>
-                <Route path="/confirm">
+                <Route path="/confirm/:id" exact>
                     <Confirmation />
+                </Route>
+                <Route path="*">
+                    <NotFound />
                 </Route>
             </Switch>
         </Router>

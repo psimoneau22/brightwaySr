@@ -4,6 +4,8 @@
 
 CREATE DATABASE Travel
 
+GO
+
 USE Travel
 
 CREATE TABLE [Country] (
@@ -12,8 +14,8 @@ CREATE TABLE [Country] (
     [Currency] VARCHAR(10) NOT NULL
 )
 
-INSERT INTO [Country] ([Name], [Currency]) VALUES
-    ('Mexico', 'MXN'),
+INSERT INTO [Country] ([Name], [Currency]) VALUES 
+    ('Mexico', 'MXN'), 
     ('Japan', 'JPY'),
     ('Austrailia', 'AUD'),
     ('Canada', 'CAD'),

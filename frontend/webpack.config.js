@@ -1,13 +1,20 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin');
 
+console.log('path', path.resolve(__dirname));
 module.exports = {
   entry: {
     app: ['regenerator-runtime', './src/index.js'],
   },
   output: {
-    path: path.resolve(__dirname, '..', 'backend', 'wwwroot', 'dist'),
+    path: path.resolve(__dirname, '..', 'backend/wwwroot/dist'),
     filename: 'app.js',
+  },
+  resolve: {
+    alias: {
+      root: path.resolve(__dirname, 'src'),
+    },
   },
   module: {
     rules: [
